@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Hot Restaurant</title>
+  <!-- Latest compiled and minified CSS & JS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://code.jquery.com/jquery.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+
+
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="jumbotron">
+      <h1 class="text-center"> <i class="fas fa-fire"></i> Hot Restaurant</h1>
+      <hr>
+      <h3 class="text-center">Make your reservation</h3>
+      
+      <div class="text-center">
+      <a href="/table"><button class="btn btn-primary"><span class="fa fa-plus"></span> View Tables</button></a>
+      <a href="/index"><button class="btn btn-light"><i class="fas fa-home"></i></button></a>
+      </div>
+    </div>
+    
+    <div class="row">
+
+      <div class="col-12">
+
+        <div class="card mb-4">
+          <div class="card-header">
+            <h6><strong>Table reservation</strong></h6>
+          </div>
+            <div class="row">
+                <div class="col-sm-12 form-group">
+                    <input class="form-control" id="name" name="name" placeholder="Name" type="text" required>
+                </div>
+                <div class="col-sm-12 form-group">
+                    <input class="form-control" id="phone" name="phone" placeholder="Phone" type="text" required>
+                </div>
+                <div class="col-sm-12 form-group">
+                    <input class="form-control" id="email" name="email" placeholder="Email" type="email" required>
+                </div>
+                <div class="col-sm-12 form-group">
+                    <input class="form-control" id="uniqueID" name="uniqueID" placeholder="Unique ID" type="uniqueID" required>
+                </div>
+            </div>   
+            
+            <br/> 
+        </form>
+
+          <div class="card-body">
+            <br>
+            <div class="text-right">
+              <button type="submit" class="btn btn-primary btn-md" id="search-btn"><span class="fa fa-search"></span> Submit </button>
+
+            </div>
+          </div>
+        </div>
+        <p><a href="https://" target="_blank">API Table Link </a>   | <a href="https://" target="_blank">API Table Link </a></p>
+                                        
+
+ </div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    $("#search-btn").on("click", function() {
+      var searchedReservation = $("#reservation-search").val().trim();
+
+      searchedCharacter = searchedCharacter.replace(/\s+/g, "").toLowerCase();
+
+      $.get("/api/reservation/" + searchedReservation, function(data) {
+        console.log(data);
+        if (data) {
+          $("#stats").show();
+          $("#name").text(data.name);
+          $("#phone").text(data.phone);
+          $("#email").text(data.email);
+          $("#unique-ID").text(data.uniqueID);
+        }
+        else {
+          $("#name").text("Not Available!");
+          $("#stats").hide();
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>
+
